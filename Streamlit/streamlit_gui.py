@@ -4,7 +4,7 @@ import joblib
 
 page = st.sidebar.radio("Select one:", ["Model","Performance Graphs", "About"])
 # st.sidebar.image("icon.png")
-st.logo(image ="icon.png",size="large")
+st.logo("icon.png",size="large")
 
 if page=="Model":
     st.title("HEART DISEASE PREDICTOR")
