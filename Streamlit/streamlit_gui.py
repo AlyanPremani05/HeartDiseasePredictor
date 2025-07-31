@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
 page = st.sidebar.radio("Select one:", ["Model","Performance Graphs", "About"])
 
@@ -120,7 +121,7 @@ if page=="Model":
 
     df = pd.DataFrame([user_input])
     if st.button("Submit"):
-        rand_forest = joblib.load("../HeartDisease.pkl")
+        rand_forest = joblib.load(os.path.join(os.path.dirname(__file__), "..", "HeartDisease.pkl"))
         prediction = rand_forest.predict(df)
         if prediction[0] == 1:
             st.error("YOU HAVE A HIGH RISK OF HEART DISEASE")
@@ -133,14 +134,14 @@ elif page=="Performance Graphs":
     curves = st.select_slider("Slide to see the Performance Graphs\n" ,options=["Confusion Matrix","Feature Importance","ROC Curve"],)
     if curves == "Confusion Matrix":
         st.header("Confusion Matrix")
-        st.image("../PERFORMANCE_GRAPHS/Confusion Matrix.png")
+        st.image(os.path.join(os.path.dirname(__file__), "..", "PERFORMANCE_GRAPHS", "Confusion Matrix.png"))
         
     elif curves == "Feature Importance":
         st.header("Feature Importance")
-        st.image("../PERFORMANCE_GRAPHS/feature_importance.png")
+        st.image(os.path.join(os.path.dirname(__file__), "..", "PERFORMANCE_GRAPHS", "feature_importance.png"))
     else:
         st.header("ROC Curve")
-        st.image("../PERFORMANCE_GRAPHS/ROC Curve.png")
+        st.image(os.path.join(os.path.dirname(__file__), "..", "PERFORMANCE_GRAPHS", "ROC Curve.png"))
 elif page =="About":
     st.title("👨‍💻 About the Developer")
     st.snow()
